@@ -1,258 +1,95 @@
 "use client";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { PlusCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export default function ManageSupplier() {
-  const { register, handleSubmit } = useForm();
+const suppliers = [
+  {
+    id: 1,
+    name: "Acme Corp",
+    contact: "John Doe",
+    email: "john@acme.com",
+    phone: "123-456-7890",
+  },
+  {
+    id: 2,
+    name: "Globex Corporation",
+    contact: "Jane Smith",
+    email: "jane@globex.com",
+    phone: "098-765-4321",
+  },
+  {
+    id: 3,
+    name: "Soylent Corp",
+    contact: "Bob Johnson",
+    email: "bob@soylent.com",
+    phone: "555-123-4567",
+  },
+  {
+    id: 4,
+    name: "Initech",
+    contact: "Michael Bolton",
+    email: "michael@initech.com",
+    phone: "555-867-5309",
+  },
+];
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
+export default function page() {
+  const router = useRouter();
   return (
-    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background">
-      <div className="container px-6 py-8">
-        <h1 className="text-3xl font-semibold mb-6">Add Vendors</h1>
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="shadow-md rounded-lg p-6 space-y-8"
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Suppliers</h1>
+        <Button
+          className="hidden sm:flex"
+          onClick={() => router.push("/supplier/add-supplier")}
         >
-          {/* Vendor Login Details */}
-          <div>
-            <h4 className="text-base md:text-xl my-2">Vendor Login Details</h4>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border rounded-lg p-4">
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Username
-                </label>
-                <input
-                  {...register("username")}
-                  className="w-full p-2 border rounded placeholder:text-gray-500"
-                  type="text"
-                  placeholder="Username"
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Login Password
-                </label>
-                <input
-                  {...register("password")}
-                  className="w-full p-2 border rounded placeholder:text-gray-500"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-          </div>
-
-          <hr className="my-4 dark:bg-white bg-black h-[1.5px]" />
-
-          {/* Vendor Details */}
-          <div>
-            <h4 className="text-base md:text-xl my-2">Vendor Details</h4>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border rounded-lg p-4">
-              {/* Supplier Name */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Supplier Name
-                </label>
-                <input
-                  {...register("supplierName")}
-                  className="w-full p-2 border rounded placeholder:text-gray-500"
-                  type="text"
-                  placeholder="Supplier Name"
-                />
-              </div>
-
-              {/* Supplier Logo */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Supplier Logo
-                </label>
-                <input
-                  {...register("supplierLogo")}
-                  className="w-full p-2 border rounded dark:bg-black"
-                  type="file"
-                  multiple
-                />
-              </div>
-
-              {/* Sightseeing Account Manager Email */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Sightseeing Account Manager Email
-                </label>
-                <input
-                  {...register("sightseeingAccountManagerEmail")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  type="email"
-                  placeholder="Sightseeing Account Manager Email"
-                />
-              </div>
-
-              {/* Booking Notification Email */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Booking Notification Email
-                </label>
-                <input
-                  {...register("bookingNotificationEmail")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  type="email"
-                  placeholder="Booking Notification Email"
-                />
-              </div>
-
-              {/* Supplier Department Email */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Supplier Department Email
-                </label>
-                <input
-                  {...register("supplierDepartmentEmail")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  type="email"
-                  placeholder="Supplier Department Email"
-                />
-              </div>
-
-              {/* Customer Care Number */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Customer Care Number
-                </label>
-                <input
-                  {...register("customerCareNumber")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  type="text"
-                  placeholder="Customer Care Number"
-                />
-              </div>
-
-              {/* WhatsApp Number */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  WhatsApp Number
-                </label>
-                <input
-                  {...register("whatsappNumber")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  type="text"
-                  placeholder="WhatsApp Number"
-                />
-              </div>
-
-              {/* Country */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Supplier Country
-                </label>
-                <select
-                  {...register("supplierCountry")}
-                  className="w-full p-2 border rounded text-gray-500"
-                >
-                  <option value="" selected disabled>
-                    Choose One Country
-                  </option>
-                </select>
-              </div>
-
-              {/* City */}
-              <div>
-                <label className="block text-gray-700 dark:text-white">
-                  Supplier City
-                </label>
-                <select
-                  {...register("supplierCity")}
-                  className="w-full p-2 border rounded text-gray-500"
-                >
-                  <option value="" selected disabled>
-                    Choose City
-                  </option>
-                </select>
-              </div>
-
-              {/* Supplier Address */}
-              <div>
-                <label className="block dark:text-white text-gray-700">
-                  Supplier Address
-                </label>
-                <textarea
-                  {...register("supplierAddress")}
-                  className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                  placeholder="Supplier Address"
-                ></textarea>
-              </div>
-            </div>
-          </div>
-
-          <hr className="my-4 dark:bg-white bg-black h-[1.5px]" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 border rounded-lg p-4">
-            <div>
-              <label className="block text-gray-700 dark:text-white">
-                TourCMS Channel Code
-              </label>
-              <input
-                {...register("tourCmsCode")}
-                className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                type="text"
-                placeholder="TourCMS Channel Code"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 dark:text-white">
-                Ventra API Key
-              </label>
-              <input
-                {...register("ventraApiKey")}
-                className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                type="text"
-                placeholder="Ventra API Key"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 dark:text-white">
-                Fareharbor Supplier Shortname
-              </label>
-              <input
-                {...register("fareharborShortname")}
-                className="w-full p-2 border rounded dark:placeholder:text-gray-500"
-                type="text"
-                placeholder="Fareharbor Shortname"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 dark:text-white">
-                Active / Inactive
-              </label>
-              <select
-                {...register("active")}
-                className="w-full p-2 border rounded text-gray-500"
-              >
-                <option value="" selected disabled>
-                  Choose one option
-                </option>
-                <option className="dark:text-white text-black" value="Inactive">
-                  Inactive
-                </option>
-                <option className="dark:text-white text-black" value="Active">
-                  Active
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded mt-4"
-          >
-            Add Supplier
-          </button>
-        </form>
+          <PlusCircle className="mr-2 h-4 w-4" /> Add Suppliers
+        </Button>
+        <Button
+          onClick={() => router.push("/supplier/add-supplier")}
+          className="sm:hidden"
+          size="icon"
+        >
+          <PlusCircle className="h-4 w-4" />
+          <span className="sr-only">Add Suppliers</span>
+        </Button>
       </div>
-    </main>
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead className="hidden md:table-cell">Contact</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead className="hidden lg:table-cell">Phone</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {suppliers.map((supplier) => (
+              <TableRow key={supplier.id}>
+                <TableCell className="font-medium">{supplier.name}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {supplier.contact}
+                </TableCell>
+                <TableCell>{supplier.email}</TableCell>
+                <TableCell className="hidden lg:table-cell">
+                  {supplier.phone}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 }
